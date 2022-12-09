@@ -8,6 +8,18 @@ module "eks" {
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets
 
+  cluster_security_group_additional_rules = {
+    enable_access_http = {
+      description = "Enable access by http port (80)"
+      protocol = "tcp"
+      from_port = 80
+      to_port = 80
+      type = "ingress"
+      cidr_blocks = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = ["::/0"]
+    }
+  }
+
   eks_managed_node_group_defaults = {
     ami_type = "AL2_x86_64"
 
@@ -18,8 +30,8 @@ module "eks" {
   }
 
   eks_managed_node_groups = {
-    one = {
-      name = "node-group-1"
+    my_node_group = {
+      name = "my_node_group"
 
       instance_types = ["t2.small"]
 
@@ -35,23 +47,5 @@ module "eks" {
         aws_security_group.node_group_one.id
       ]
     }
-
-    # two = {
-    #   name = "node-group-2"
-
-    #   instance_types = ["t3.small"]
-
-    #   min_size     = 1
-    #   max_size     = 2
-    #   desired_size = 1
-
-    #   pre_bootstrap_user_data = <<-EOT
-    #   echo 'foo bar'
-    #   EOT
-
-    #   vpc_security_group_ids = [
-    #     aws_security_group.node_group_two.id
-    #   ]
-    # }
   }
 }

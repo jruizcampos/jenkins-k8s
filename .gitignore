@@ -3,6 +3,7 @@
 .terraform.lock.hcl
 
 *.out
+aws_lb/
 
 # .tfstate files
 *.tfstate

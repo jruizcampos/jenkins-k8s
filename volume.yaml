@@ -1,0 +1,56 @@
+# Azure
+# apiVersion: storage.k8s.io/v1
+# kind: StorageClass
+# metadata:
+  # name: managed-retain
+# provisioner: disk.csi.azure.com
+# parameters:
+  # skuName: StandardSSD_LRS
+# reclaimPolicy: Retain
+# volumeBindingMode: WaitForFirstConsumer
+# allowVolumeExpansion: true
+
+# Azure
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+  # name: jenkins-pv-claim
+  # namespace: devops-tools
+# spec:
+  # storageClassName: managed-retain
+  # accessModes:
+    # - ReadWriteOnce
+  # resources:
+    # requests:
+      # storage: 3Gi
+
+# Digital Ocean
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: jenkins-pv-claim
+#   namespace: devops-tools
+# spec:
+#   storageClassName: do-block-storage
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 3Gi
+
+# AWS
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jenkins-pv-claim
+  namespace: devops-tools
+spec:
+  storageClassName: gp2
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
