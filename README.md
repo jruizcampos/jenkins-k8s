@@ -29,14 +29,38 @@ Run:
 - ` terraform plan -out plan.out `
 - ` terraform apply plan.out `
 
+## Install the Amazon EBS CSI driver
+Official Amazon AWS documentation: https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html
+
+- In the following code, replace **my-cluster** with the name of your EKS Cluster and run the command:
+```
+eksctl create iamserviceaccount \
+  --name ebs-csi-controller-sa \
+  --namespace kube-system \
+  --cluster my-cluster \
+  --attach-policy-arn arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy \
+  --approve \
+  --role-only \
+  --role-name AmazonEKS_EBS_CSI_DriverRole
+```
+- Add the Amazon EBS CSI Driver using the AWS Console:
+![Get more add-ons](https://johnruizcampos.com/wp-content/uploads/aws_eks_cluster_k8s_1.jpg)
+
+![Select the Amazon EBS CSI Driver](https://johnruizcampos.com/wp-content/uploads/aws_eks_cluster_k8s_2.jpg)
+
+![Select the AmazonEKS_EBS_CSI_DriverRole](https://johnruizcampos.com/wp-content/uploads/aws_eks_cluster_k8s_3.jpg)
+
+![Create the AmazonEKS_EBS_CSI_DriverRole](https://johnruizcampos.com/wp-content/uploads/aws_eks_cluster_k8s_4.jpg)
+
 ## Install the AWS Load Balancer Controller
-Official Amazon AWS documentation (https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html)
+Official Amazon AWS documentation: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
 
 Run:
 - `curl -o iam_policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.4.4/docs/install/iam_policy.json`
 
 - `aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-document file://iam_policy.json `
 
+- In the following code, replace **my-cluster** with the name of your EKS Cluster and **arn:aws:iam::111122223333:policy/AWSLoadBalancerControllerIAMPolicy** with the ARN of your IAM Policy. Then run the command:
 ```
 eksctl create iamserviceaccount \
   --cluster=my-cluster \
