@@ -29,6 +29,18 @@ Run:
 - ` terraform plan -out plan.out `
 - ` terraform apply plan.out `
 
+Update your local kubeconfig file to access the EKS Cluster just created. Replace region-code with the name of the AWS region you're using (us-east-1 for example) and my-cluster with the name of your EKS cluster:
+```
+aws eks update-kubeconfig --region region-code --name my-cluster
+```
+
+Verify you can successfully connect to the EKS Cluster:
+```
+kubectl get nodes
+kubectl get nodes -o wide
+```
+![Kubectl connect to EKS Cluster](https://johnruizcampos.com/wp-content/uploads/kubectl_eks_cluster.jpg)
+
 ## Install the Amazon EBS CSI driver
 Official Amazon AWS documentation: https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html
 
