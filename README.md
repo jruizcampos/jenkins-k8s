@@ -43,13 +43,14 @@ eksctl create iamserviceaccount \
   --role-only \
   --role-name AmazonEKS_EBS_CSI_DriverRole
 ```
-- Add the Amazon EBS CSI Driver using the AWS Console:
+Add the Amazon EBS CSI Driver using the AWS Console:
+- Go to your EKS Cluster, select **_Add-ons section_** and click on **_Get more add-ons_**:
 ![Get more add-ons](https://johnruizcampos.com/wp-content/uploads/aws_eks_cluster_k8s_1.jpg)
-
+- Select the **_Amazon EBS CSI Driver_**:
 ![Select the Amazon EBS CSI Driver](https://johnruizcampos.com/wp-content/uploads/aws_eks_cluster_k8s_2.jpg)
-
+- Select the **_AmazonEKS_EBS_CSI_DriverRole_**:
 ![Select the AmazonEKS_EBS_CSI_DriverRole](https://johnruizcampos.com/wp-content/uploads/aws_eks_cluster_k8s_3.jpg)
-
+- Create the **_AmazonEKS_EBS_CSI_DriverRole_**:
 ![Create the AmazonEKS_EBS_CSI_DriverRole](https://johnruizcampos.com/wp-content/uploads/aws_eks_cluster_k8s_4.jpg)
 
 ## Install the AWS Load Balancer Controller
