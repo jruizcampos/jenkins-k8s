@@ -36,6 +36,11 @@ eksctl create cluster --name my-cluster --region us-east-1 --zones "us-east-1a,u
 ```
 eksctl utils associate-iam-oidc-provider --region=us-east-1 --cluster=my-cluster --approve
 ```
+O todo en un solo paso:
+```
+eksctl create cluster --name my-cluster --region us-east-1 --zones "us-east-1a,us-east-1b,us-east-1c" --version 1.24 --node-type "t2.small" --nodes 2 --nodes-min 1 --nodes-max 2 --with-oidc --alb-ingress-access --spot
+```
+
 Update your local kubeconfig file to access the EKS Cluster just created. Replace region-code with the name of the AWS region you're using (us-east-1 for example) and my-cluster with the name of your EKS cluster:
 ```
 aws eks update-kubeconfig --region region-code --name my-cluster
@@ -101,7 +106,7 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
   --set clusterName=my-cluster \
   --set serviceAccount.create=false \
   --set serviceAccount.name=aws-load-balancer-controller \
-  --set image.repository=602401143452.dkr.ecr.region-code.amazonaws.com/amazon/aws-load-balancer-controller
+  --set image.repository=602401143452.dkr.ecr.us-east-1.amazonaws.com/amazon/aws-load-balancer-controller
 ```
 ## Installing the Jenkins deployment
 ```

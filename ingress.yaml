@@ -7,13 +7,18 @@ metadata:
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/subnets: subnet-01cebcc0efbbcf03b,subnet-029c19d00e8b0a673,subnet-050a90c2ff72c8be6
+    alb.ingress.kubernetes.io/subnets: subnet-0a06eaf6571d57343, subnet-0a99f971baacaf26c, subnet-0745b11dddcf02e4e
     # alb.ingress.kubernetes.io/tags: Environment=dev,Team=test
 spec:
+  defaultBackend:
+    service:
+      name: jenkins-service
+      port:
+        number: 8080
   ingressClassName: alb
   rules:
-    - host: jenkins.johnruiz.tk
-      http:
+    #- host: jenkins.johnruiz.tk
+    - http:
         paths:
           - path: /
             pathType: Exact
@@ -21,4 +26,4 @@ spec:
               service:
                 name: jenkins-service
                 port:
-                  number: 80
+                  number: 8080
