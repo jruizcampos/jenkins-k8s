@@ -34,6 +34,7 @@ module "eks" {
       name = "my_node_group"
 
       instance_types = ["t2.small"]
+      capacity_type  = "SPOT"
 
       min_size     = 1
       max_size     = 2

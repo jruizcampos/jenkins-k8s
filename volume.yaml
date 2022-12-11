@@ -1,3 +1,18 @@
+# AWS
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jenkins-pv-claim
+  namespace: devops-tools
+spec:
+  storageClassName: gp2
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+
 # Azure
 # apiVersion: storage.k8s.io/v1
 # kind: StorageClass
@@ -39,18 +54,3 @@
 #   resources:
 #     requests:
 #       storage: 3Gi
-
-# AWS
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: jenkins-pv-claim
-  namespace: devops-tools
-spec:
-  storageClassName: gp2
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 3Gi

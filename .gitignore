@@ -4,6 +4,7 @@
 
 *.out
 aws_lb/
+echo_server/
 
 # .tfstate files
 *.tfstate

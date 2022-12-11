@@ -29,6 +29,13 @@ Run:
 - ` terraform plan -out plan.out `
 - ` terraform apply plan.out `
 
+## Deploy Kubernetes EKS Cluster using eksctl
+```
+eksctl create cluster --name my-cluster --region us-east-1 --zones "us-east-1a,us-east-1b,us-east-1c" --version 1.24 --node-type "t2.small" --nodes 2 --nodes-min 1 --nodes-max 2 --spot
+```
+```
+eksctl utils associate-iam-oidc-provider --region=us-east-1 --cluster=my-cluster --approve
+```
 Update your local kubeconfig file to access the EKS Cluster just created. Replace region-code with the name of the AWS region you're using (us-east-1 for example) and my-cluster with the name of your EKS cluster:
 ```
 aws eks update-kubeconfig --region region-code --name my-cluster
@@ -36,8 +43,8 @@ aws eks update-kubeconfig --region region-code --name my-cluster
 
 Verify you can successfully connect to the EKS Cluster:
 ```
+kubectl cluster-info
 kubectl get nodes
-kubectl get nodes -o wide
 ```
 ![Kubectl connect to EKS Cluster](https://johnruizcampos.com/wp-content/uploads/kubectl_eks_cluster.jpg)
 
@@ -87,6 +94,7 @@ eksctl create iamserviceaccount \
 - `helm repo add eks https://aws.github.io/eks-charts `
 - `helm repo update`
 
+In the following code, replace **my-cluster** with the name of your EKS Cluster, **region-code** with the name of the AWS region you're using (us-east-1 for example) and run the command:
 ```
 helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
   -n kube-system \
@@ -95,6 +103,36 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
   --set serviceAccount.name=aws-load-balancer-controller \
   --set image.repository=602401143452.dkr.ecr.region-code.amazonaws.com/amazon/aws-load-balancer-controller
 ```
+## Installing the Jenkins deployment
+```
+kubectl apply -f namespace.yaml
+namespace/devops-tools created
+```
+```
+kubectl apply -f serviceAccount.yaml 
+role.rbac.authorization.k8s.io/jenkins-admin created
+serviceaccount/jenkins-admin created
+rolebinding.rbac.authorization.k8s.io/jenkins-role-binding created
+```
+```
+kubectl apply -f volume.yaml 
+persistentvolumeclaim/jenkins-pv-claim created
+```
+```
+kubectl apply -f deployment.yaml 
+deployment.apps/jenkins created
+```
+```
+kubectl apply -f service.yaml 
+service/jenkins-service created
+```
 
-- `helm ls`
+Edit the **ingress.yaml** file
+```
+eksctl get cluster my-cluster
+```
 
+```
+kubectl apply -f ingress.yaml 
+ingress.networking.k8s.io/jenkins-ingress created
+```
