@@ -2,14 +2,14 @@
 Project about deploying Jenkins in Kubernetes (AWS EKS) platform
 
 ## Deploy Kubernetes EKS Cluster (AWS) using eksctl
-Ejecutar en 2 pasos:
+Run in 2 steps:
 ```
 eksctl create cluster --name my-cluster --region us-east-1 --zones "us-east-1a,us-east-1b,us-east-1c" --version 1.24 --node-type "t2.small" --nodes 2 --nodes-min 1 --nodes-max 2 --spot
 ```
 ```
 eksctl utils associate-iam-oidc-provider --region=us-east-1 --cluster=my-cluster --approve
 ```
-O todo en un solo paso:
+Or everything in one step:
 ```
 eksctl create cluster --name my-cluster --region us-east-1 --zones "us-east-1a,us-east-1b,us-east-1c" --version 1.24 --node-type "t2.small" --nodes 2 --nodes-min 1 --nodes-max 2 --with-oidc --alb-ingress-access --spot
 ```
@@ -35,16 +35,18 @@ helm install prometheus prometheus-community/prometheus
 Official Amazon AWS documentation: https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html
 
 - In the following code, replace **my-cluster** with the name of your EKS Cluster and run the command:
-```
+
+<pre><code>
 eksctl create iamserviceaccount \
   --name ebs-csi-controller-sa \
   --namespace kube-system \
-  --cluster my-cluster \
+  --cluster <b>my-cluster</b> \
   --attach-policy-arn arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy \
   --approve \
   --role-only \
   --role-name AmazonEKS_EBS_CSI_DriverRole
-```
+</code></pre>
+
 Add the Amazon EBS CSI Driver using the AWS Console:
 - Go to your EKS Cluster, select **_Add-ons section_** and click on **_Get more add-ons_**:
 ![Get more add-ons](https://johnruizcampos.com/wp-content/uploads/aws_eks_cluster_k8s_1.jpg)
@@ -65,8 +67,7 @@ Run:
 
 - In the following code, replace **my-cluster** with the name of your EKS Cluster and **111122223333** with your AWS Account ID. Then run the command:
 
-<pre>
-<code>
+<pre><code>
 eksctl create iamserviceaccount \
   --cluster=<b>my-cluster</b> \
   --namespace=kube-system \
@@ -74,8 +75,7 @@ eksctl create iamserviceaccount \
   --role-name "AmazonEKSLoadBalancerControllerRole" \
   --attach-policy-arn=arn:aws:iam::<b>111122223333</b>:policy/AWSLoadBalancerControllerIAMPolicy \
   --approve 
-</code>
-</pre>
+</code></pre>
 
 - `helm repo add eks https://aws.github.io/eks-charts `
 - `helm repo update`
