@@ -61,11 +61,15 @@ helm install prometheus prometheus-community/prometheus
 Official Amazon AWS documentation: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
 
 Run:
-- `curl -o iam_policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.4.4/docs/install/iam_policy.json`
+```
+curl -o iam_policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.4.4/docs/install/iam_policy.json
+```
 
-- `aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-document file://iam_policy.json `
+```
+aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-document file://iam_policy.json
+```
 
-- In the following code, replace **my-cluster** with the name of your EKS Cluster and **111122223333** with your AWS Account ID. Then run the command:
+In the following code, replace **my-cluster** with the name of your EKS Cluster and **111122223333** with your AWS Account ID. Then run the command:
 
 <pre><code>
 eksctl create iamserviceaccount \
