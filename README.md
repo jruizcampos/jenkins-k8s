@@ -66,6 +66,7 @@ Run:
 - In the following code, replace **my-cluster** with the name of your EKS Cluster and **111122223333** with your AWS Account ID. Then run the command:
 
 <pre>
+<code>
 eksctl create iamserviceaccount \
   --cluster=<b>my-cluster</b> \
   --namespace=kube-system \
@@ -73,6 +74,7 @@ eksctl create iamserviceaccount \
   --role-name "AmazonEKSLoadBalancerControllerRole" \
   --attach-policy-arn=arn:aws:iam::<b>111122223333</b>:policy/AWSLoadBalancerControllerIAMPolicy \
   --approve 
+</code>
 </pre>
 
 - `helm repo add eks https://aws.github.io/eks-charts `
