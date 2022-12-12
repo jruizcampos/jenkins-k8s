@@ -29,9 +29,7 @@ spec:
               cpu: "500m"
           ports:
             - containerPort: 8080
-              name: http
             - containerPort: 50000
-              name: jnlp
           livenessProbe:
             httpGet:
               path: "/login"
