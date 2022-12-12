@@ -138,3 +138,12 @@ Create the ingress:
 kubectl apply -f ingress.yaml 
 ingress.networking.k8s.io/jenkins-ingress created
 ```
+
+Verify the correct ALB creation in the AWS Management Console:
+
+![](https://johnruizcampos.com/wp-content/uploads/aws_eks_cluster_k8s_6.jpg)
+
+## Accessing Jenkins
+Access Jenkins through the DNS name of the Application Load Balancer:
+
+
