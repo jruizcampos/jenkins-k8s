@@ -80,10 +80,9 @@ eksctl create iamserviceaccount \
 - `helm repo add eks https://aws.github.io/eks-charts `
 - `helm repo update`
 
-In the following code, replace **my-cluster** with the name of your EKS Cluster, **region-code** with the name of the AWS region you're using (us-east-1 for example) and run the command:
+In the following code, replace **my-cluster** with the name of your EKS Cluster, **602401143452** and **region-code** with the values corresponding to the AWS region you're using ([Check here](https://docs.aws.amazon.com/eks/latest/userguide/add-ons-images.html)), and run the command:
 
-<pre><code>
-helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
+<pre><code>helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
   -n kube-system \
   --set clusterName=<b>my-cluster</b> \
   --set serviceAccount.create=false \
