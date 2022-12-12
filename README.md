@@ -15,9 +15,8 @@ eksctl create cluster --name my-cluster --region us-east-1 --zones "us-east-1a,u
 ```
 
 Update your local kubeconfig file to access the EKS Cluster just created. Replace region-code with the name of the AWS region you're using (us-east-1 for example) and my-cluster with the name of your EKS cluster:
-```
-aws eks update-kubeconfig --region region-code --name my-cluster
-```
+
+<pre><code>aws eks update-kubeconfig --region <b>region-code</b> --name <b>my-cluster</b></code></pre>
 
 Verify you can successfully connect to the EKS Cluster:
 ```
@@ -26,11 +25,6 @@ kubectl get nodes
 ```
 ![Kubectl connect to EKS Cluster](https://johnruizcampos.com/wp-content/uploads/kubectl_eks_cluster.jpg)
 
-## Install Prometheus for Cluster Monitoring
-Install the Prometheus helm chart for monitoring the Kubernetes Cluster:
-```
-helm install prometheus prometheus-community/prometheus
-```
 ## Install the Amazon EBS CSI driver
 Official Amazon AWS documentation: https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html
 
@@ -56,6 +50,12 @@ Add the Amazon EBS CSI Driver using the AWS Console:
 ![Select the AmazonEKS_EBS_CSI_DriverRole](https://johnruizcampos.com/wp-content/uploads/aws_eks_cluster_k8s_3.jpg)
 - Create the **_AmazonEKS_EBS_CSI_DriverRole_**:
 ![Create the AmazonEKS_EBS_CSI_DriverRole](https://johnruizcampos.com/wp-content/uploads/aws_eks_cluster_k8s_4.jpg)
+
+## Install Prometheus for Cluster Monitoring
+Install the Prometheus helm chart for monitoring the Kubernetes Cluster:
+```
+helm install prometheus prometheus-community/prometheus
+```
 
 ## Install the AWS Load Balancer Controller
 Official Amazon AWS documentation: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
