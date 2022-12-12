@@ -120,12 +120,14 @@ service/jenkins-service created
 
 ## Setup the AWS ALB Ingress
 
-Get the list of subnets in the cluster:
-<pre><code>
-eksctl get cluster my-cluster
+Get the list of public subnets in the cluster.
+- Using **eksctl** in the console:
+<pre><code>eksctl get cluster my-cluster
 NAME            VERSION STATUS  CREATED                 VPC                     SUBNETS                                                                                                 SECURITYGROUPS          PROVIDER
-my-cluster      1.24    ACTIVE  2022-12-12T02:13:37Z    vpc-071296a74ea97b395   subnet-01b449afb4905d455,subnet-040c68498ec3bef05,subnet-08ecd5f948f1a693d,subnet-0c7b39e8f32222166     sg-02b75c7e46626a5e4    EKS
+my-cluster      1.24    ACTIVE  2022-12-12T14:38:34Z    vpc-0d3480fcbf26b253b   subnet-04fb2b4252c3e38b2,subnet-0c4b6807f56cbd85d,subnet-0ce7fbd629a3db193,subnet-0d4585057389798f7     sg-0c47545165b23b5d0    EKS
 </code></pre>
+- Using the AWS Management Console:
+![List of public subnets](https://johnruizcampos.com/wp-content/uploads/aws_eks_cluster_k8s_5.jpg)
 
 Edit the **ingress.yaml** file. In the ***alb.ingress.kubernetes.io/subnets*** param add the subnet list:
 ```
