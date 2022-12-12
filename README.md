@@ -63,16 +63,17 @@ Run:
 
 - `aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-document file://iam_policy.json `
 
-- In the following code, replace **my-cluster** with the name of your EKS Cluster and **arn:aws:iam::111122223333:policy/AWSLoadBalancerControllerIAMPolicy** with the ARN of your IAM Policy. Then run the command:
-```
+- In the following code, replace **my-cluster** with the name of your EKS Cluster and **111122223333** with your AWS Account ID. Then run the command:
+
+<pre>
 eksctl create iamserviceaccount \
-  --cluster=my-cluster \
+  --cluster=<b>my-cluster</b> \
   --namespace=kube-system \
   --name=aws-load-balancer-controller \
   --role-name "AmazonEKSLoadBalancerControllerRole" \
-  --attach-policy-arn=arn:aws:iam::111122223333:policy/AWSLoadBalancerControllerIAMPolicy \
+  --attach-policy-arn=arn:aws:iam::<b>111122223333</b>:policy/AWSLoadBalancerControllerIAMPolicy \
   --approve 
-```
+</pre>
 
 - `helm repo add eks https://aws.github.io/eks-charts `
 - `helm repo update`
