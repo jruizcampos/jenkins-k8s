@@ -121,7 +121,7 @@ my-cluster      1.24    ACTIVE  2022-12-12T02:13:37Z    vpc-071296a74ea97b395   
 Edit the **ingress.yaml** file. In the ***alb.ingress.kubernetes.io/subnets*** param add the subnet list:
 ```
 annotations:
-  alb.ingress.kubernetes.io/subnets: subnet-0a06eaf6571d57343, subnet-0a99f971baacaf26c, subnet-0745b11dddcf02e4e
+  alb.ingress.kubernetes.io/subnets: subnet-01b449afb4905d455,subnet-040c68498ec3bef05,subnet-08ecd5f948f1a693d,subnet-0c7b39e8f32222166
 ```
 Create the ingress:
 ```
