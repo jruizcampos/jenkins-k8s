@@ -1,35 +1,8 @@
 # Jenkins-K8s
 Project about deploying Jenkins in Kubernetes (AWS EKS) platform
 
-## Deploy Kubernetes Cluster (AWS EKS)
-Personalize the cluster capacity modifying the **eks-cluster.tf** file:
-```
-eks_managed_node_groups = {
-    my_node_group = {
-      name = "my_node_group"
-
-      instance_types = ["t2.small"]
-
-      min_size     = 1
-      max_size     = 2
-      desired_size = 2
-
-      pre_bootstrap_user_data = <<-EOT
-      echo 'foo bar'
-      EOT
-
-      vpc_security_group_ids = [
-        aws_security_group.node_group_one.id
-      ]
-    }
-  }
-```
-Run:
-- ` terraform validate `
-- ` terraform plan -out plan.out `
-- ` terraform apply plan.out `
-
-## Deploy Kubernetes EKS Cluster using eksctl
+## Deploy Kubernetes EKS Cluster (AWS) using eksctl
+Ejecutar en 2 pasos:
 ```
 eksctl create cluster --name my-cluster --region us-east-1 --zones "us-east-1a,us-east-1b,us-east-1c" --version 1.24 --node-type "t2.small" --nodes 2 --nodes-min 1 --nodes-max 2 --spot
 ```
@@ -53,6 +26,11 @@ kubectl get nodes
 ```
 ![Kubectl connect to EKS Cluster](https://johnruizcampos.com/wp-content/uploads/kubectl_eks_cluster.jpg)
 
+## Install Prometheus for Cluster Monitoring
+Install the Prometheus helm chart for monitoring the Kubernetes Cluster:
+```
+helm install prometheus prometheus-community/prometheus
+```
 ## Install the Amazon EBS CSI driver
 Official Amazon AWS documentation: https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html
 
