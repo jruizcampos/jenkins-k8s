@@ -146,4 +146,32 @@ Verify the correct ALB creation in the AWS Management Console:
 ## Accessing Jenkins
 Access Jenkins through the DNS name of the Application Load Balancer:
 
+![Jenkins Initial Setup](https://johnruizcampos.com/wp-content/uploads/aws_eks_cluster_k8s_7.jpg)
 
+To get the initial administrator password we need to check the Jenkins pod logs.
+To identify the Jenkins pods run:
+<pre><code><b>kubectl get pods -n devops-tools</b>
+NAME                       READY   STATUS    RESTARTS   AGE
+<b>jenkins-5ddc766476-ll82g</b>   1/1     Running   0          88m
+</code></pre>
+
+Get the last 20 log lines of the jenkins pod:
+<pre><code><b>kubectl logs jenkins-5ddc766476-ll82g --tail 20 -n devops-tools</b>
+
+*************************************************************
+*************************************************************
+
+Jenkins initial setup is required. An admin user has been created and a password generated.
+Please use the following password to proceed to installation:
+
+<b>a14f39190fa44226af623ce9560b0d7b</b>
+
+This may also be found at: /var/jenkins_home/secrets/initialAdminPassword
+
+*************************************************************
+*************************************************************
+</code></pre>
+Enter the password, install the suggested plugins, create the first administrator user and access Jenkins:
+
+![Installing plugins](https://johnruizcampos.com/wp-content/uploads/aws_eks_cluster_k8s_10.jpg)
+![Jenkins Reaady](https://johnruizcampos.com/wp-content/uploads/aws_eks_cluster_k8s_13.jpg)
