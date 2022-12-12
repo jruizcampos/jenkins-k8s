@@ -81,14 +81,16 @@ eksctl create iamserviceaccount \
 - `helm repo update`
 
 In the following code, replace **my-cluster** with the name of your EKS Cluster, **region-code** with the name of the AWS region you're using (us-east-1 for example) and run the command:
-```
+
+<pre><code>
 helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
   -n kube-system \
-  --set clusterName=my-cluster \
+  --set clusterName=<b>my-cluster</b> \
   --set serviceAccount.create=false \
   --set serviceAccount.name=aws-load-balancer-controller \
-  --set image.repository=602401143452.dkr.ecr.us-east-1.amazonaws.com/amazon/aws-load-balancer-controller
-```
+  --set image.repository=<b>602401143452</b>.dkr.ecr.<b>region-code</b>.amazonaws.com/amazon/aws-load-balancer-controller
+</code></pre>
+
 ## Installing the Jenkins deployment
 ```
 kubectl apply -f namespace.yaml
@@ -116,11 +118,12 @@ service/jenkins-service created
 ## Setup the AWS ALB Ingress
 
 Get the list of subnets in the cluster:
-```
+<pre><code>
 eksctl get cluster my-cluster
 NAME            VERSION STATUS  CREATED                 VPC                     SUBNETS                                                                                                 SECURITYGROUPS          PROVIDER
 my-cluster      1.24    ACTIVE  2022-12-12T02:13:37Z    vpc-071296a74ea97b395   subnet-01b449afb4905d455,subnet-040c68498ec3bef05,subnet-08ecd5f948f1a693d,subnet-0c7b39e8f32222166     sg-02b75c7e46626a5e4    EKS
-```
+</code></pre>
+
 Edit the **ingress.yaml** file. In the ***alb.ingress.kubernetes.io/subnets*** param add the subnet list:
 ```
 annotations:
