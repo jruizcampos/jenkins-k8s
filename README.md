@@ -129,11 +129,10 @@ my-cluster      1.24    ACTIVE  2022-12-12T14:38:34Z    vpc-0d3480fcbf26b253b   
 - Using the AWS Management Console:
 ![List of public subnets](https://johnruizcampos.com/wp-content/uploads/aws_eks_cluster_k8s_5.jpg)
 
-Edit the **ingress.yaml** file. In the ***alb.ingress.kubernetes.io/subnets*** param add the public subnet list:
-```
-annotations:
-  alb.ingress.kubernetes.io/subnets: subnet-0c4b6807f56cbd85d, subnet-0ce7fbd629a3db193
-```
+Edit the **ingress.yaml** file. In the ***alb.ingress.kubernetes.io/subnets*** param add the public subnet list. Have in account to add just one subnet por availability zone:
+<pre><code>annotations:
+  alb.ingress.kubernetes.io/subnets: <b>subnet-0c4b6807f56cbd85d,subnet-0ce7fbd629a3db193</b>
+</code></pre>
 Create the ingress:
 ```
 kubectl apply -f ingress.yaml 
