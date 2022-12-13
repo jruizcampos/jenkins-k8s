@@ -30,8 +30,7 @@ Official Amazon AWS documentation: https://docs.aws.amazon.com/eks/latest/usergu
 
 - In the following code, replace **my-cluster** with the name of your EKS Cluster and run the command:
 
-<pre><code>
-eksctl create iamserviceaccount \
+<pre><code>eksctl create iamserviceaccount \
   --name ebs-csi-controller-sa \
   --namespace kube-system \
   --cluster <b>my-cluster</b> \
@@ -53,7 +52,11 @@ Add the Amazon EBS CSI Driver using the AWS Console:
 
 ## Install Prometheus for Cluster Monitoring
 Install the Prometheus helm chart for monitoring the Kubernetes Cluster:
+```bash
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
 ```
+```bash
 helm install prometheus prometheus-community/prometheus
 ```
 
