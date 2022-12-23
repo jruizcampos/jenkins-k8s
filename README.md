@@ -4,14 +4,14 @@ Project about deploying Jenkins in Kubernetes (AWS EKS) platform
 ## Deploy Kubernetes EKS Cluster (AWS) using eksctl
 Run in 2 steps:
 ```bash
-eksctl create cluster --name my-cluster --region us-east-1 --zones "us-east-1a,us-east-1b" --version 1.24 --node-type "t2.small" --nodes 2 --nodes-min 1 --nodes-max 2 --spot
+eksctl create cluster --name "my-cluster" --region "us-east-1" --zones "us-east-1a,us-east-1b" --version 1.24 --node-type "t2.small" --nodes 2 --nodes-min 1 --nodes-max 2 --spot
 ```
 ```bash
-eksctl utils associate-iam-oidc-provider --region=us-east-1 --cluster=my-cluster --approve
+eksctl utils associate-iam-oidc-provider --region="us-east-1" --cluster="my-cluster" --approve
 ```
 Or everything in one step:
 ```bash
-eksctl create cluster --name my-cluster --region us-east-1 --zones "us-east-1a,us-east-1b" --version 1.24 --node-type "t2.small" --nodes 2 --nodes-min 1 --nodes-max 2 --with-oidc --alb-ingress-access --spot
+eksctl create cluster --name "my-cluster" --region "us-east-1" --zones "us-east-1a,us-east-1b" --version 1.24 --node-type "t2.small" --nodes 2 --nodes-min 1 --nodes-max 2 --with-oidc --alb-ingress-access --spot
 ```
 
 Update your local kubeconfig file to access the EKS Cluster just created. Replace region-code with the name of the AWS region you're using (us-east-1 for example) and my-cluster with the name of your EKS cluster:
