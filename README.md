@@ -23,6 +23,8 @@ aws eks update-kubeconfig --region "region-code" --name "my-cluster"
 Verify you can successfully connect to the EKS Cluster:
 ```bash
 kubectl cluster-info
+```
+```bash
 kubectl get nodes
 ```
 ![Kubectl connect to EKS Cluster](https://johnruizcampos.com/wp-content/uploads/kubectl_eks_cluster.jpg)
