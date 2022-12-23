@@ -27,6 +27,7 @@ kubectl cluster-info
 ```bash
 kubectl get nodes
 ```
+
 ![Kubectl connect to EKS Cluster](https://johnruizcampos.com/wp-content/uploads/kubectl_eks_cluster.jpg)
 
 ## Install the Amazon EBS CSI driver
