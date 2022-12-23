@@ -3,14 +3,14 @@ Project about deploying Jenkins in Kubernetes (AWS EKS) platform
 
 ## Deploy Kubernetes EKS Cluster (AWS) using eksctl
 Run in 2 steps:
-```
+```bash
 eksctl create cluster --name my-cluster --region us-east-1 --zones "us-east-1a,us-east-1b" --version 1.24 --node-type "t2.small" --nodes 2 --nodes-min 1 --nodes-max 2 --spot
 ```
-```
+```bash
 eksctl utils associate-iam-oidc-provider --region=us-east-1 --cluster=my-cluster --approve
 ```
 Or everything in one step:
-```
+```bash
 eksctl create cluster --name my-cluster --region us-east-1 --zones "us-east-1a,us-east-1b" --version 1.24 --node-type "t2.small" --nodes 2 --nodes-min 1 --nodes-max 2 --with-oidc --alb-ingress-access --spot
 ```
 
@@ -19,7 +19,7 @@ Update your local kubeconfig file to access the EKS Cluster just created. Replac
 <pre><code>aws eks update-kubeconfig --region <b>region-code</b> --name <b>my-cluster</b></code></pre>
 
 Verify you can successfully connect to the EKS Cluster:
-```
+```bash
 kubectl cluster-info
 kubectl get nodes
 ```
@@ -64,18 +64,17 @@ helm install prometheus prometheus-community/prometheus
 Official Amazon AWS documentation: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
 
 Run:
-```
+```bash
 curl -o iam_policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.4.4/docs/install/iam_policy.json
 ```
 
-```
+```bash
 aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-document file://iam_policy.json
 ```
 
 In the following code, replace **my-cluster** with the name of your EKS Cluster and **111122223333** with your AWS Account ID. Then run the command:
 
-<pre><code>
-eksctl create iamserviceaccount \
+<pre><code>eksctl create iamserviceaccount \
   --cluster=<b>my-cluster</b> \
   --namespace=kube-system \
   --name=aws-load-balancer-controller \
@@ -98,25 +97,25 @@ In the following code, replace **my-cluster** with the name of your EKS Cluster,
 </code></pre>
 
 ## Installing the Jenkins deployment
-```
+```bash
 kubectl apply -f namespace.yaml
 namespace/devops-tools created
 ```
-```
-kubectl apply -f serviceAccount.yaml 
+```bash
+kubectl apply -f serviceAccount.yaml
 role.rbac.authorization.k8s.io/jenkins-admin created
 serviceaccount/jenkins-admin created
 rolebinding.rbac.authorization.k8s.io/jenkins-role-binding created
 ```
-```
+```bash
 kubectl apply -f volume.yaml 
 persistentvolumeclaim/jenkins-pv-claim created
 ```
-```
+```bash
 kubectl apply -f deployment.yaml 
 deployment.apps/jenkins created
 ```
-```
+```bash
 kubectl apply -f service.yaml 
 service/jenkins-service created
 ```
