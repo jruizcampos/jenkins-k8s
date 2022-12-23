@@ -16,7 +16,9 @@ eksctl create cluster --name "my-cluster" --region "us-east-1" --zones "us-east-
 
 Update your local kubeconfig file to access the EKS Cluster just created. Replace region-code with the name of the AWS region you're using (us-east-1 for example) and my-cluster with the name of your EKS cluster:
 
-<pre><code>aws eks update-kubeconfig --region <b>region-code</b> --name <b>my-cluster</b></code></pre>
+```bash
+aws eks update-kubeconfig --region "region-code" --name "my-cluster"
+```
 
 Verify you can successfully connect to the EKS Cluster:
 ```bash
