@@ -33,18 +33,29 @@ kubectl get nodes
 ## Install the Amazon EBS CSI driver
 Official Amazon AWS documentation: https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html
 
-- In the following code, replace **my-cluster** with the name of your EKS Cluster and run the command:
+### Create the EBS CSI IAM role
+In the following code, replace **my-cluster** with the name of your EKS Cluster and run the command:
 
-<pre><code>eksctl create iamserviceaccount \
+```bash
+eksctl create iamserviceaccount \
   --name ebs-csi-controller-sa \
   --namespace kube-system \
-  --cluster <b>my-cluster</b> \
+  --cluster my-cluster \
   --attach-policy-arn arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy \
   --approve \
   --role-only \
   --role-name AmazonEKS_EBS_CSI_DriverRole
+```
+
+### Install EBS CSI driver using eksctl
+<pre><code>eksctl create addon --name aws-ebs-csi-driver --cluster <b>my-cluster</b> --service-account-role-arn arn:aws:iam::<b>111122223333</b>:role/AmazonEKS_EBS_CSI_DriverRole
 </code></pre>
 
+### Install EBS CSI driver using AWS CLI
+<pre><code>aws eks create-addon --cluster-name <b>my-cluster</b> --addon-name aws-ebs-csi-driver --service-account-role-arn arn:aws:iam::<b>111122223333</b>:role/AmazonEKS_EBS_CSI_DriverRole
+</code></pre>
+
+### Install EBS CSI driver using AWS Console
 Add the Amazon EBS CSI Driver using the AWS Console:
 - Go to your EKS Cluster, select **_Add-ons section_** and click on **_Get more add-ons_**:
 ![Get more add-ons](https://johnruizcampos.com/wp-content/uploads/aws_eks_cluster_k8s_1.jpg)
