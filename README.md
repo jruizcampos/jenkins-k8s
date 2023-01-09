@@ -27,8 +27,11 @@ kubectl cluster-info
 ```bash
 kubectl get nodes
 ```
-
-![Kubectl connect to EKS Cluster](https://johnruizcampos.com/wp-content/uploads/kubectl_eks_cluster.jpg)
+```bash
+NAME                             STATUS   ROLES    AGE    VERSION
+ip-192-168-13-120.ec2.internal   Ready    <none>   149m   v1.24.7-eks-fb459a0
+ip-192-168-53-51.ec2.internal    Ready    <none>   149m   v1.24.7-eks-fb459a0
+```
 
 ## Install the Amazon EBS CSI driver
 Official Amazon AWS documentation: https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html
@@ -99,8 +102,13 @@ In the following code, replace **my-cluster** with the name of your EKS Cluster 
   --approve 
 </code></pre>
 
-- `helm repo add eks https://aws.github.io/eks-charts `
-- `helm repo update`
+```bash
+helm repo add eks https://aws.github.io/eks-charts
+```
+
+```bash
+helm repo update
+```
 
 In the following code, replace **my-cluster** with the name of your EKS Cluster, **602401143452** and **region-code** with the values corresponding to the AWS region you're using ([Check here](https://docs.aws.amazon.com/eks/latest/userguide/add-ons-images.html)), and run the command:
 
