@@ -51,6 +51,7 @@ eksctl create iamserviceaccount \
 ```
 
 ### Install EBS CSI driver using eksctl
+In the following code, replace **my-cluster** with the name of your EKS Cluster, **111122223333** with your AWS Account ID and run the command:
 <pre><code>eksctl create addon --name aws-ebs-csi-driver --cluster <b>my-cluster</b> --service-account-role-arn arn:aws:iam::<b>111122223333</b>:role/AmazonEKS_EBS_CSI_DriverRole
 </code></pre>
 
@@ -105,19 +106,18 @@ In the following code, replace **my-cluster** with the name of your EKS Cluster 
 ```bash
 helm repo add eks https://aws.github.io/eks-charts
 ```
-
 ```bash
 helm repo update
 ```
 
-In the following code, replace **my-cluster** with the name of your EKS Cluster, **602401143452** and **region-code** with the values corresponding to the AWS region you're using ([Check here](https://docs.aws.amazon.com/eks/latest/userguide/add-ons-images.html)), and run the command:
+In the following code, replace **my-cluster** with the name of your EKS Cluster, **602401143452** and **us-east-1** with the values corresponding to the AWS region you're using ([Check here](https://docs.aws.amazon.com/eks/latest/userguide/add-ons-images.html)), and run the command:
 
 <pre><code>helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
   -n kube-system \
   --set clusterName=<b>my-cluster</b> \
   --set serviceAccount.create=false \
   --set serviceAccount.name=aws-load-balancer-controller \
-  --set image.repository=<b>602401143452</b>.dkr.ecr.<b>region-code</b>.amazonaws.com/amazon/aws-load-balancer-controller
+  --set image.repository=<b>602401143452</b>.dkr.ecr.<b>us-east-1</b>.amazonaws.com/amazon/aws-load-balancer-controller
 </code></pre>
 
 ## Installing the Jenkins deployment
