@@ -14,10 +14,10 @@ Or everything in one step:
 eksctl create cluster --name "my-cluster" --region "us-east-1" --zones "us-east-1a,us-east-1b" --version 1.24 --node-type "t2.small" --nodes 2 --nodes-min 1 --nodes-max 2 --with-oidc --alb-ingress-access --spot
 ```
 
-Update your local kubeconfig file to access the EKS Cluster just created. Replace region-code with the name of the AWS region you're using (us-east-1 for example) and my-cluster with the name of your EKS cluster:
+Update your local kubeconfig file to access the EKS Cluster just created. Replace **us-east-1** with the name of the AWS region you're using, and **my-cluster** with the name of your EKS cluster:
 
 ```bash
-aws eks update-kubeconfig --region "region-code" --name "my-cluster"
+aws eks update-kubeconfig --region "us-east-1" --name "my-cluster"
 ```
 
 Verify you can successfully connect to the EKS Cluster:
@@ -74,6 +74,8 @@ Add the Amazon EBS CSI Driver using the AWS Console:
 Install the Prometheus helm chart for monitoring the Kubernetes Cluster:
 ```bash
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+```
+```bash
 helm repo update
 ```
 ```bash
