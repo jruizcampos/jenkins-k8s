@@ -1,6 +1,9 @@
 # Jenkins-K8s
 Project about deploying Jenkins in Kubernetes (AWS EKS) platform
 
+## Jenkins Architecture on Kubernetes EKS Cluster
+![Jenkins Architecture](https://johnruizcampos.com/wp-content/uploads/aws_kubernetes_eks_cluster_arquitecture.jpg)
+
 ## Deploy Kubernetes EKS Cluster (AWS) using eksctl
 Run in 2 steps:
 ```bash
